@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canplaythrough 后调用播放</title>
+</head>
+
+<body>
+  <video id="video" controls preload x5-video-player-type="h5-page" height="50%" width="100%" type="video/mp4" src="">
+    <!-- <source src="http://cdn.tencent.neigou.com/Public/Home/mobileAsset/images/tencent2018/video5.mp4" type="video/mp4"> -->
+  </video>
+  <div><button id="button">播放</button></div>
+  <script src="https://libs.cdnjs.net/vConsole/3.3.4/vconsole.min.js"></script>
+  <script>
+    new VConsole();
+    const video = document.getElementById('video');
+    const button = document.getElementById('button');
+
+    const onClick = () => {
+      video.src = 'http://cdn.tencent.neigou.com/Public/Home/mobileAsset/images/tencent2018/video5.mp4';
+      video.load();
+    };
+
+    const onCanplaythrough = () => {
+      video.play().then(() => {
+        console.log('播放成功');
+      }).catch(() => {
+        console.error('播放被阻止');
+      });
+    };
+
+    button.addEventListener('click', onClick);
+    video.addEventListener('canplaythrough', onCanplaythrough);
+  </script>
+</body>
+
+</html>
